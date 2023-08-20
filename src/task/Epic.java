@@ -1,29 +1,28 @@
 package task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Epic extends Task {
 
-    List<Integer> subtaskId;
+    private List<Integer> subtaskIds = new ArrayList<>();
 
 
-    public Epic(String name, String description, String status, List<Integer> subtaskId) {
+    public Epic(String name, String description, String status) {
         super(name, description, status);
-        this.subtaskId = subtaskId;
     }
 
-    public Epic(String name, String description, int id, String status, List<Integer> subtaskId) {
+    public Epic(String name, String description, int id, String status) {
         super(name, description, id, status);
-        this.subtaskId = subtaskId;
     }
 
-    public List<Integer> getSubtaskId() {
-        return subtaskId;
+    public List<Integer> getSubtaskIds() {
+        return new ArrayList<>(subtaskIds);
     }
 
-    public void setSubtaskId(List<Integer> subtaskId) {
-        this.subtaskId = subtaskId;
+    public void setSubtaskId(Integer subtaskId) {
+        subtaskIds.add(subtaskId);
     }
 
     @Override
@@ -32,18 +31,18 @@ public class Epic extends Task {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Epic epic = (Epic) o;
-        return Objects.equals(subtaskId, epic.subtaskId);
+        return Objects.equals(subtaskIds, epic.subtaskIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), subtaskId);
+        return Objects.hash(super.hashCode(), subtaskIds);
     }
 
     @Override
     public String toString() {
         return "Epic{" +
-                "subtaskId=" + subtaskId +
+                "subtaskId=" + subtaskIds +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +

@@ -3,10 +3,10 @@ package task;
 import java.util.Objects;
 
 public class Task {
-    String name;
-    String description;
-    int id;
-    String status;
+    protected String name;
+    protected String description;
+    protected int id;
+    protected String status;
 
     public Task(String name, String description, String status) {
         this.name = name;
