@@ -59,21 +59,24 @@ public class InMemoryTaskManager implements TaskManager {
 
     //2.3 Получение по идентификатору@Override
     @Override
-    public Task getTaskById(Integer id) {
-        historyManager.add(tasks.get(id)); //записали задачу в историю просмотров через обращение к менеджеру истории
-        return tasks.get(id);
+    public Task getTaskById(Integer id) { //записали задачу в историю просмотров через обращение к менеджеру истории
+        Task task = tasks.get(id);
+        historyManager.add(task);
+        return task;
     }
 
     @Override
     public Epic getEpicById(Integer id) {
-        historyManager.add(epics.get(id));
-        return epics.get(id);
+        Epic epic = epics.get(id);
+        historyManager.add(epic);
+        return epic;
     }
 
     @Override
     public Subtask getSubtaskById(Integer id) {
-        historyManager.add(subtasks.get(id));
-        return subtasks.get(id);
+        Subtask subtask = subtasks.get(id);
+        historyManager.add(subtask);
+        return subtask;
     }
 
     //2.4 Создание. Сам объект должен передаваться в качестве параметра.
