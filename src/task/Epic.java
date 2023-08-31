@@ -7,13 +7,11 @@ import java.util.Objects;
 public class Epic extends Task {
 
     private List<Integer> subtaskIds = new ArrayList<>();
-
-
-    public Epic(String name, String description, String status) {
+    public Epic(String name, String description, Status status) {
         super(name, description, status);
     }
 
-    public Epic(String name, String description, int id, String status) {
+    public Epic(String name, String description, int id, Status status) {
         super(name, description, id, status);
     }
     public void deleteAllSubtaskIds() {
