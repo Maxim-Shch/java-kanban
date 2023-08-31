@@ -15,8 +15,8 @@ public class InMemoryHistoryManager implements HistoryManager {//создали 
             if (history.size() == 10) {
                 history.remove(0); //удалили первый элемент чтобы записать  в историю новый элемент
             }
+            history.add(task); // поместил во внутрь проверки на null
         }
-        history.add(task);
     }
 
     @Override
