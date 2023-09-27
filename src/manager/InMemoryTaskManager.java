@@ -136,6 +136,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteTaskById(Integer id) {
         tasks.remove(id);
+        historyManager.remove(id);//удаление истории просмотров
     }
 
     @Override
@@ -145,6 +146,7 @@ public class InMemoryTaskManager implements TaskManager {
         subtasks.remove(id);
         epics.get(epicId).deleteSubtaskId(id);
         updateEpicStatus(epics.get(epicId));
+        historyManager.remove(id);//удаление истории просмотров
     }
 
     @Override
@@ -152,8 +154,10 @@ public class InMemoryTaskManager implements TaskManager {
         Epic epic = epics.get(id);
         for (Integer subId : epic.getSubtaskIds()) {
             subtasks.remove(subId);
+            historyManager.remove(subId);
         }
         epics.remove(id);
+        historyManager.remove(id);//удаление истории просмотров
     }
 
     //3.1 Получение списка всех подзадач определённого эпика.
