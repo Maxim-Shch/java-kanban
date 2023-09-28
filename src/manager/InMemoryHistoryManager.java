@@ -9,18 +9,11 @@ import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {//создали реализацию интерфейса истории
 
-    //private List<Task> history = new ArrayList<>(); //список для истории просмотров
     public CustomLinkedList<Task> historyLinkedList = new CustomLinkedList<>();
     private Map<Integer, Node<Task>> mapForHistoryList = new HashMap<>();
 
     @Override
     public void add(Task task) {
-//        if (task != null) {
-//            if (history.size() == 10) {
-//                history.remove(0); //удалили первый элемент чтобы записать  в историю новый элемент
-//            }
-//            history.add(task); // поместил во внутрь проверки на null
-//        }
         if (task != null) {
             remove(task.getId());
             historyLinkedList.linkLast(task);
@@ -66,7 +59,6 @@ public class InMemoryHistoryManager implements HistoryManager {//создали 
             if (node != null) {
                 final Node<Task> next = node.next;
                 final Node<Task> prev = node.prev;
-                node.data = null;
 
                 if (head == node && tail == node) {
                     head = null;

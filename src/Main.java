@@ -35,33 +35,6 @@ public class Main {
 
         Epic epicWithOneSubtasks = new Epic("epicOneSubtask", "epicOneDescription", Status.NEW);//эпик id=6
         taskManager.createEpic(epicWithOneSubtasks); //создали эпик, который равен id = 7
-//        Subtask oneSubtask = new Subtask("epicOneSubtask", "epicOneDescription", Status.NEW,
-//                epicWithOneSubtasks.getId());//инициализировали подзадачу эпика первую
-//        taskManager.createSubtask(oneSubtask); //сохранили подзадачу id=7
-
-//        System.out.println(taskManager.getListOfTasks());//распечатали список задач
-//        System.out.println(taskManager.getListOfEpic());
-//        System.out.println(taskManager.getListOfSubtask());
-//
-//        taskOne.setStatus(Status.IN_PROGRESS);//изменяем статус
-//        taskManager.updateTask(taskOne);
-//
-//        subtaskOne.setStatus(Status.DONE);
-//        taskManager.updateSubtask(subtaskOne);
-//        subtaskTwo.setStatus(Status.DONE);
-//        taskManager.updateSubtask(subtaskTwo);
-//
-//        System.out.println();
-//        System.out.println(taskManager.getListOfTasks());
-//        System.out.println(taskManager.getListOfSubtask());
-//        System.out.println(taskManager.getListOfEpic());
-//
-//        taskManager.deleteTaskById(1);
-//        taskManager.deleteEpicById(3);
-//        System.out.println();
-//        System.out.println(taskManager.getListOfTasks());
-//        System.out.println(taskManager.getListOfSubtask());
-//        System.out.println(taskManager.getListOfEpic());
 
         taskManager.getTaskById(1);//история
         taskManager.getEpicById(7);
@@ -87,11 +60,5 @@ public class Main {
 
         taskManager.deleteEpicById(3); //удаление эпика с тремя подзадачами
         System.out.println(taskManager.getHistory());
-
-
-//        taskManager.getSubtaskById(7);//проверка записи в историю 11-го элемента со сдвигом влево
-//        System.out.println();
-//        System.out.println(taskManager.getHistory());
-
     }
 }
