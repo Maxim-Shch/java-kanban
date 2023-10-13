@@ -14,7 +14,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         this.file = file;
     }
 
-    static FileBackedTasksManager loadFromFile(File file) {
+    public static FileBackedTasksManager loadFromFile(File file) {
         FileBackedTasksManager fileManager = new FileBackedTasksManager(file);
 
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -55,10 +55,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
             epics.put(currentTask.getId(), (Epic) currentTask);
         } else if (currentTask instanceof  Subtask) {
             int epicId = ((Subtask) currentTask).getEpicId();
-            Epic epic = getEpicForFileLoad(epicId);
+            Epic epic = epics.get(epicId);
             epic.setSubtaskId(currentTask.getId());
             epics.put(epicId, epic);
-            subtasks.put(currentTask.getId(), (Subtask) currentTask);
         } else {
             tasks.put(currentTask.getId(), currentTask);
         }
@@ -69,7 +68,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
 
 
-    void save() {
+    private void save() {
         try(Writer writer = new FileWriter(file)) { //Исключения вида IOException
             writer.write("id, type, name,description, epic\n");
             writeTasks(getListOfTasks(), writer);
@@ -215,11 +214,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
                 int epicId = Integer.parseInt(taskData[5]);
                 return new Subtask(name, description, id, status, epicId);
             default:
-                return null;
+                throw new ManagerLoadException("Ошибка восстановления задачи из строки.");
         }
     }
 
-    private static String historyToString(HistoryManager manager) { //сохранениe истории in CSV.
+    private String historyToString(HistoryManager manager) { //сохранениe истории in CSV.
         List<String> taskIds = new ArrayList<>();
 
         for (Task task : manager.getHistory()) {
