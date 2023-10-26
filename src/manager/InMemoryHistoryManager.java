@@ -13,7 +13,7 @@ public class InMemoryHistoryManager implements HistoryManager {//создали 
     private Map<Integer, Node<Task>> mapForHistoryList = new HashMap<>();
 
     @Override
-    public void add(Task task) {
+    public void addTask(Task task) {
         if (task != null) {
             remove(task.getId());
             historyLinkedList.linkLast(task);

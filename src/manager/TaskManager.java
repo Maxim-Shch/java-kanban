@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface TaskManager {
 
+    List<Task> getPrioritizedTask();
+
     List<Task> getListOfTasks();
 
     List<Epic> getListOfEpic();
@@ -27,11 +29,11 @@ public interface TaskManager {
 
     Subtask getSubtaskById(Integer id);
 
-    void createTask(Task task);
+    int addNewTask(Task task);
 
-    void createSubtask(Subtask subtask);
+    int addNewEpic(Epic epic);
 
-    void createEpic(Epic epic);
+    Integer addNewSubtask(Subtask subtask);
 
     void updateTask(Task task);
 

@@ -1,12 +1,33 @@
 package task;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
+    protected int id;
     protected String name;
     protected String description;
-    protected int id;
-    protected Status status; //Изменили тип Srting на тип Status и ниже везде
+
+    public Status status; //Изменили тип Srting на тип Status и ниже везде
+    protected long duration;
+    LocalDateTime startTime;
+
+    public Task(String name, String description, Status status, long duration, LocalDateTime startTime) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
+
+    public Task(int id, String name, String description,  Status status, long duration, LocalDateTime startTime) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
 
     public Task(String name, String description, Status status) {
         this.name = name;
@@ -14,11 +35,31 @@ public class Task {
         this.status = status;
     }
 
-    public Task(String name, String description, int id, Status status) {
+    public Task(int id, String name, String description,  Status status) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.id = id;
         this.status = status;
+    }
+
+    public LocalDateTime getEndTime() {
+        LocalDateTime endTime;
+        if (startTime == null) {
+            endTime = null;
+
+        } else {
+            endTime = startTime.plusMinutes(duration);
+
+        }
+        return endTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,12 +78,47 @@ public class Task {
         this.description = description;
     }
 
-    public int getId() {
-        return id;
+    public long getDuration() {
+        return duration;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", duration=" + duration +
+                ", startTime=" + startTime +
+                ", endTime=" + getEndTime() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && duration == task.duration && Objects.equals(name, task.name) &&
+                Objects.equals(description, task.description) && status == task.status && Objects.equals(startTime, task.startTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, id, status);
     }
 
     public Status getStatus() {
@@ -51,29 +127,5 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description)
-                && Objects.equals(status, task.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description, id, status);
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status='" + status + '\'' +
-                '}';
     }
 }

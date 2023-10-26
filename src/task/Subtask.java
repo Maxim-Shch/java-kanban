@@ -1,18 +1,20 @@
 package task;
-
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Subtask extends Task {
 
-    private Integer epicId;
+    protected Integer epicId;
 
-    public Subtask(String name, String description, int id, Status status, Integer epicId) {
-        super(name, description, id, status);
+    public Subtask(String name, String description, Status status, long duration, LocalDateTime startTime,
+                   int epicId) {
+        super(name, description, status, duration, startTime);
         this.epicId = epicId;
     }
 
-    public Subtask(String name, String description, Status status, Integer epicId) {
-        super(name, description, status);
+    public Subtask(int id, String name, String description, Status status, long duration, LocalDateTime startTime,
+                   int epicId) {
+        super(id, name, description, status, duration, startTime);
         this.epicId = epicId;
     }
 
@@ -20,7 +22,7 @@ public class Subtask extends Task {
         return epicId;
     }
 
-    public void setEpicId(Integer epicId) {
+    public void setEpicId(Integer epicId) {//
         this.epicId = epicId;
     }
 
@@ -34,18 +36,20 @@ public class Subtask extends Task {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), epicId);
-    }
-
-    @Override
     public String toString() {
         return "Subtask{" +
                 "epicId=" + epicId +
+                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", duration=" + duration +
+                ", startTime=" + startTime +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), epicId);
     }
 }
