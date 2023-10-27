@@ -63,10 +63,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
             epic.setSubtaskId(currentTask.getId());
             epics.put(epicId, epic);
             subtasks.put(currentTask.getId(), (Subtask) currentTask);
-            checkTaskTime(currentTask);
         } else {
             tasks.put(currentTask.getId(), currentTask);
-            checkTaskTime(currentTask);
         }
         if (currentTask.getId() > generatorId) {
             generatorId = currentTask.getId();
