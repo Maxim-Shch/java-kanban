@@ -61,21 +61,6 @@ class EpicTest {
         assertEquals(Status.DONE, saveEpic.status); //Done потому что все его подзадачи Done
     }
     //d. Подзадачи со статусами NEW and Done
-//    @Test
-//    public void epicStatusBeInProgressWhenSubtaskOfEpicAreNewAndDone() {
-//        Epic epic = createEpic();
-//        taskManager.addNewEpic(epic);
-//        Subtask subtaskOne = new Subtask("Подзадача 1 эпика", "Описание 1",Status.NEW, 60,
-//                LocalDateTime.of(2023, 9, 1, 15, 00), epic.getId());
-//        Subtask subtaskTwo = new Subtask("Подзадача 2 эпика 1", "Описание 2", Status.DONE, 60,
-//                LocalDateTime.of(2023, 7, 1, 15, 00), epic.getId());
-//        taskManager.addNewSubtask(subtaskOne);
-//        taskManager.addNewSubtask(subtaskTwo);
-//        final Epic saveEpic = taskManager.getEpicById(epic.getId());
-//
-//        assertEquals(Status.IN_PROGRESS, saveEpic.status); //IN_PROGRESS потому что одна подзадача NEW, вторая Done
-//    }
-
     @Test
     public void epicStatusBeInProgressWhenSubtaskOfEpicAreNewAndDone() {//добавили
         Epic epic = createEpic();

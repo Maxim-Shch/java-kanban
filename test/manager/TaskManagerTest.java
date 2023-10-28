@@ -106,11 +106,13 @@ abstract class TaskManagerTest<T extends TaskManager> {
         assertEquals(1, epics.size(), "Неверное количество эпиков.");
         assertEquals(epic, epics.get(0), "Эпики не совпадают.");
     }
+
     @Test
     void shouldReturnListOfTask() {
         Task task = createTask();
         taskManager.addNewTask(task);
         Task taskOne = createTask();
+        taskOne.setStartTime(task.getEndTime().plusMinutes(1)); // Изменяем время начала выполнения задачи 2
         taskManager.addNewTask(taskOne);
 
         final List<Task> tasks = taskManager.getListOfTasks();
@@ -334,6 +336,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
     void shouldDeleteAllTasks() {
         Task task1 = createTask();
         Task task2 = createTask();
+        task2.setStartTime(task1.getEndTime().plusMinutes(1));//Устанавливаем  время начала задачи 2 на 1 минуту после задачи 1
         taskManager.addNewTask(task1);
         taskManager.addNewTask(task2);
         taskManager.deleteAllTasks();
