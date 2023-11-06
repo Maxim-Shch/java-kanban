@@ -1,4 +1,4 @@
-package manager;
+package managers;
 
 import org.junit.jupiter.api.BeforeEach;
 

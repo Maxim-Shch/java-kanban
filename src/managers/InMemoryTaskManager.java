@@ -1,4 +1,4 @@
-package manager;
+package managers;
 
 import exceptions.ManagerValidateException;
 import task.Epic;
@@ -42,7 +42,6 @@ public class InMemoryTaskManager implements TaskManager {
         } else {
             prioritizedTasks.add(task);
         }
-
     }
     private void checkTaskBeforeUpdating(Task task) {
         Task taskToRemove = null;

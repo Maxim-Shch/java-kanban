@@ -1,7 +1,7 @@
 package task;
 
-import manager.InMemoryTaskManager;
-import manager.TaskManager;
+import managers.InMemoryTaskManager;
+import managers.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
