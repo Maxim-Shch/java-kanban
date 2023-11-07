@@ -1,5 +1,6 @@
 package httpServers;
 
+import exceptions.ErrorException;
 import exceptions.ManagerLoadException;
 import exceptions.ManagerSaveException;
 
@@ -29,6 +30,10 @@ public class KVTaskClient {
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString()
         );
+        if (response.statusCode() != 200) {
+            throw new ErrorException("Произошла ошибка при запросе: " + response.statusCode());
+        }
+
         apiToken = response.body();
     }
 

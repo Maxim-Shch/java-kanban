@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HttpTaskServerTest { //перед запуском тестов сделать запуск KV-сервера через Main
 
     Gson gson = new Gson();
+
     private static TaskManager taskManager;
     private static HttpTaskServer taskServer;
 

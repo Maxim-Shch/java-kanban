@@ -3,7 +3,6 @@ package httpServers;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +29,6 @@ public class KVServer {
             System.out.println("\n/load");
             if(!hasAuth(h)) {
                 System.out.println("Запрос неавторизован, нужен параметр в query API_TOKEN со значением апи-ключа");
-                //h.sendResponseHeaders(HttpURLConnection.HTTP_FORBIDDEN,0);
                 h.sendResponseHeaders(403,0);
                 return;
             }
@@ -38,24 +36,20 @@ public class KVServer {
                 String key = h.getRequestURI().getPath().substring("/load/".length());
                 if(key.isEmpty()) {
                     System.out.println("Key для получения данных пустой. key указывается в пути: /load/{key}");
-                    //h.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
                     h.sendResponseHeaders(400, 0);
                     return;
                 }
                 if(data.get(key) == null) {
                     System.out.println("Данные для ключа " + key + " отсутствуют.");
-                    //h.sendResponseHeaders(HttpURLConnection.HTTP_NOT_FOUND,0);
                     h.sendResponseHeaders(400,0);
                     return;
                 }
                 String response = data.get(key);
                 sendText(h, response);
                 System.out.println("Данные для ключа " + key + " успешно получены.");
-                //h.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
                 h.sendResponseHeaders(200,0);
             } else {
                 System.out.println("/load ждёт GET-запрос, а получил: " + h.getRequestMethod());
-                //h.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 h.sendResponseHeaders(405, 0);
             }
         } finally {
@@ -68,7 +62,6 @@ public class KVServer {
             System.out.println("\n/save");
             if (!hasAuth(h)) {
                 System.out.println("Запрос неавторизован, нужен параметр в query API_TOKEN со значением апи-ключа");
-//                h.sendResponseHeaders(HttpURLConnection.HTTP_FORBIDDEN, 0);
                 h.sendResponseHeaders(403, 0);
                 return;
             }
@@ -76,24 +69,20 @@ public class KVServer {
                 String key = h.getRequestURI().getPath().substring("/save/".length());
                 if (key.isEmpty()) {
                     System.out.println("Key для сохранения пустой. key указывается в пути: /save/{key}");
-//                    h.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
                     h.sendResponseHeaders(400, 0);
                     return;
                 }
                 String value = readText(h);
                 if (value.isEmpty()) {
                     System.out.println("Value для сохранения пустой. value указывается в теле запроса");
-//                    h.sendResponseHeaders(HttpURLConnection.HTTP_NOT_FOUND, 0);
                     h.sendResponseHeaders(400, 0);
                     return;
                 }
                 data.put(key, value);
                 System.out.println("Значение для ключа " + key + " успешно обновлено!");
-//                h.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 h.sendResponseHeaders(200, 0);
             } else {
                 System.out.println("/save ждёт POST-запрос, а получил: " + h.getRequestMethod());
-                //h.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 h.sendResponseHeaders(405, 0);
             }
         } finally {
@@ -108,7 +97,6 @@ public class KVServer {
                 sendText(h, apiToken);
             } else {
                 System.out.println("/register ждёт GET-запрос, а получил " + h.getRequestMethod());
-                //h.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 h.sendResponseHeaders(405, 0);
             }
         } finally {
@@ -144,7 +132,6 @@ public class KVServer {
     protected void sendText(HttpExchange h, String text) throws IOException {
         byte[] resp = text.getBytes(UTF_8);
         h.getResponseHeaders().add("Content-Type", "application/json");
-        //h.sendResponseHeaders(HttpURLConnection.HTTP_OK, resp.length);
         h.sendResponseHeaders(200, resp.length);
         h.getResponseBody().write(resp);
     }
